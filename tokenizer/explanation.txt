@@ -1,0 +1,11 @@
+Lab 1: Text Processing and Tokenization - Written Explanation
+
+Tokenization is how we break text into pieces that computers can work with. LLMs can't read words like we do so we need to convert them into what they can process. We split text into tokens and assign each one a unique ID. Without this step, there's no way to feed text into a model. It's basically translating human language into something a machine can process.
+
+In the lab, we used regex to split the text on punctuation and spaces. The pattern catches commas, periods, spaces, and other characters. After splitting, we filtered out junk like empty strings, tabs, and line breaks since those would mess things up. Then we made a vocabulary by getting all the unique tokens and sorting them. This vocab is our lookup table it maps every word or symbol to a number.
+
+The SimpleTokenizer class handles encoding and decoding. It stores two dictionaries: w2i which is word to index and i2w which is index to word. The encode method splits text into tokens and converts them to numbers using w2i. The decode method does the opposite takes a list of numbers and turns them back into readable text using i2w. There's some regex cleanup at the end to fix spacing around punctuation.
+
+Our simple tokenizer only works with words it's seen before. If you try to encode something not in the vocab, it breaks. That's why we also tested tiktoken, which uses Byte Pair Encoding. It breaks words into subword pieces, so it can handle new words by combining smaller chunks it already knows.
+
+The last step was making data loaders for training. LLMs learn from sequences, not individual words. The dataloader uses a sliding window to create batches. With max_length=4, each example is 4 tokens, and the target is those same tokens shifted by one. That's how the model learns to predict what comes next. Processing multiple sequences at once makes training faster.
