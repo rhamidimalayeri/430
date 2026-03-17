@@ -1,1 +1,5 @@
-This lab shows the basic structure of a GPT-style model. Input text is converted into token and positional embeddings, passed through Transformer blocks, and then mapped to output logits that predict the next token. Because the model is decoder-only, it generates text one token at a time using only the words that come before it. Overall, the lab gives a simple view of how GPT models process language and generate text.
+This lab shows how a GPT-style model is built using the main parts of a Transformer. The input text is first converted into token embeddings, and positional embeddings are added so the model can keep track of word order.
+
+The model is decoder-only, which means it predicts one token at a time based only on the words that came before it. The Transformer blocks use self-attention to help the model focus on important earlier tokens in the sequence.
+
+After passing through the Transformer blocks, the model produces logits that represent possible next-token predictions. The text generation step then uses those predictions to generate new text, showing the basic process behind how GPT models work.
